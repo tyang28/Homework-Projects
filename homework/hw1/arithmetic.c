@@ -1,47 +1,47 @@
-/** Teng-Ju Yang Hw1                                                                                                                                                                                                               
- *  tyang28                                                                                                                                                                                                                        
+/** Teng-Ju Yang Hw1                                                                                                               
+ *tyang28                                                                                                                          
  */
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 int main () {
-  int l = 100;
-  char exp[l];
-  printf("b\n");
+  float num1;
+  float num2;
+  float final = 0.0;
+  char oper;
+  char oper2;
+  char buff[100];
+
   printf("Please enter an arithmetic expression using * and / only:\n");
-  while (fgets(exp, l, stdin) != NULL) {
-    /*
-    printf("%c\n", exp[0]);
-    printf("%c\n", exp[1]);
-    printf("%c\n", exp[2]);
-    printf("%c\n", exp[3]);
-    */
-    for(int i = 0; i < strlen(exp); i++) { 
-      if((exp[i] == '*' && exp[i+1] == '/') || (exp[i] == '/' && exp[i+1] == '*') || (exp[i] == '*' && exp[i+1] == '*') || (exp[i] == '/' && exp[i+1] == '/')){
+ 
+  if(scanf("%f", &num1) == 1) {
+  
+    while(scanf(" %c %f", &oper, &num2) == 2) {
+  
+      if((oper != '*') && (oper != '/')) {
 	printf("malformed formula\n");
 	return 0;
       }
-      else if(exp[i] == '/' && exp[i+1] == '0') {
+      else if((oper == '/' && num2 == 0)) {
 	printf("division by zero\n");
 	return 0;
       }
-    }
-    char *num;
-    num = strtok(exp, " ");
-    //printf("%s\n", num);
-    
-    while (num != NULL) {
-      printf("%s\n", num);
-      atof(num);
-      /*
-      if(num == '*') {
-	
+      else if(oper == '*') {
+	num1 *=  num2;
       }
-      */
-      num = strtok(NULL, " ");
+      else if(oper == '/') {
+	num1 /=  num2;
+      }
+      final = num1;
+      printf("%f\n", final);      
     }
-    
-    
+
   }
-  return 0;
+  else {
+    printf("malformed formula\n");
+  }
+  
+  return 0; 
+    
 }
