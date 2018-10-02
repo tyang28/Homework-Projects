@@ -1,5 +1,5 @@
 // search_functions.c
-// <STUDENT: ADD YOUR INFO HERE: name, JHED, etc.>
+// Teng-Ju Yang tyang28
 //
 //
 
@@ -65,7 +65,7 @@ int find_right(char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   int found;
   int i,j,k;
   int searchlen = strlen(word);
-    
+  write_to = stdout;
   for(i = 0; i < n; i++) {
     for(j = 0; j <= n - searchlen; j++) {
       found = 1;
@@ -77,7 +77,7 @@ int find_right(char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
       }
       if(found == 1) {
 	count++;
-	printf("%s %d %d R\n", word, i, j);
+	fprintf(write_to, "%s %d %d R\n", word, i, j);
       }
      
     }
@@ -97,7 +97,7 @@ int find_left (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   int found;
   int a,b,c;
   int searchlen = strlen(word);
-
+  write_to = stdout;
   for(a = 0; a < n; a++) {
     for(b = n-1; b >= n - searchlen; b--) {
       found = 1;
@@ -109,7 +109,8 @@ int find_left (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
       }
       if(found == 1) {
         count++;
-	printf("%s %d %d L\n", word, a, b);
+	fprintf(write_to, "%s %d %d L\n", word, a, b);
+	
       }
      
     }
@@ -128,7 +129,7 @@ int find_down (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   int found;
   int a,b,c;
   int searchlen = strlen(word);
-
+  write_to = stdout;
   for(a = 0; a <= n - searchlen; a++) {
     for(b = 0; b < n; b++) {
       found = 1;
@@ -140,7 +141,8 @@ int find_down (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
       }
       if(found == 1) {
         count++;
-	printf("%s %d %d D\n", word, a, b);
+	fprintf(write_to, "%s %d %d D\n", word, a, b);
+	
       }
 
     }
@@ -160,7 +162,7 @@ int find_up   (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   int found;
   int a,b,c;
   int searchlen = strlen(word);
-
+  write_to = stdout;
   for(a = n-1; a >= n - searchlen; a--) {
     for(b = 0; b < n; b++) {
       found = 1;
@@ -172,7 +174,7 @@ int find_up   (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
       }
       if(found == 1) {
         count++;
-	printf("%s %d %d U\n", word, a, b);
+	fprintf(write_to, "%s %d %d U\n", word, a, b);
       }
 
     }
@@ -187,16 +189,16 @@ int find_up   (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
  * <Replace this with your own useful comment.> 
  */
 int find_all  (char grid[][MAX_SIZE], int n, char word[], FILE *write_to) {
-  //int found = 0;
   
+  write_to = stdout;
   int a = find_right(grid, n, word, stdout);
   int b = find_left(grid, n, word, stdout);
   int c = find_down(grid, n, word, stdout);
   int d = find_up(grid, n, word, stdout);
   if((a == 0) && (b == 0) && (c == 0) && (d == 0)){
-    printf("%s - Not Found\n", word);
+    fprintf(write_to, "%s - Not Found\n", word);
   }
-  //return found;
+  return 1;
 } 
 
 
