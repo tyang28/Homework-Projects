@@ -58,7 +58,9 @@ int populate_grid(char grid[][MAX_SIZE], char filename_to_read_from[]){
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Loops through grid to find the start position of a word
+ * then loops in the right direction with word to see if identical.  
+ * returns number of instances found
  */
 int find_right(char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   int count = 0;
@@ -89,7 +91,9 @@ int find_right(char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
 
 
 /* 
- * <Replace this with your own useful comment.> 
+ * Loops through grid (right side) to find the start position of a word      
+ * then loops in the left direction with word to see if identical.         
+ * returns number of instances found  
  */
 int find_left (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   
@@ -119,9 +123,10 @@ int find_left (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
 
 }
 
-
-/* 
- * <Replace this with your own useful comment.> 
+/*                                                                               
+ * Loops through grid  to find the start position of a word           
+ * then loops in down direction with word to see if identical.                
+ * returns number of instances found                                              
  */
 int find_down (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
 
@@ -152,12 +157,12 @@ int find_down (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
 
 }
 
-
-/* 
- * <Replace this with your own useful comment.> 
+/*                                                                                
+ * Loops through grid (bottom side) to find the start position of a word          
+ * then loops in the up direction with word to see if identical.                
+ * returns number of instances found                                              
  */
-int find_up   (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
-
+int find_up (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
   int count = 0;
   int found;
   int a,b,c;
@@ -184,9 +189,10 @@ int find_up   (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
 
 }
 
-
-/* 
- * <Replace this with your own useful comment.> 
+/*
+ *Calls all find functions and checks if any of them are 0
+ *if one equals 0, prints out "NOT FOUND"                                        
+ *returns 1 if executed successfully 
  */
 int find_all  (char grid[][MAX_SIZE], int n, char word[], FILE *write_to) {
   
