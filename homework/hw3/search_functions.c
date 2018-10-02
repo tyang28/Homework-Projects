@@ -187,13 +187,16 @@ int find_up   (char grid[][MAX_SIZE], int n, char word[], FILE *write_to){
  * <Replace this with your own useful comment.> 
  */
 int find_all  (char grid[][MAX_SIZE], int n, char word[], FILE *write_to) {
-
-  find_right(grid, n, word, stdout);
-  find_left(grid, n, word, stdout);
-  find_down(grid, n, word, stdout);
-  find_up(grid, n, word, stdout);
+  //int found = 0;
   
-
+  int a = find_right(grid, n, word, stdout);
+  int b = find_left(grid, n, word, stdout);
+  int c = find_down(grid, n, word, stdout);
+  int d = find_up(grid, n, word, stdout);
+  if((a == 0) && (b == 0) && (c == 0) && (d == 0)){
+    printf("%s - Not Found\n", word);
+  }
+  //return found;
 } 
 
 
