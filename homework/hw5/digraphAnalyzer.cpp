@@ -43,13 +43,12 @@ int main(int argc, char* argv[]) {
   //getline(FILE, digraphline);
   //cout << digraphline << endl;
   std::set<string> sorted;
+  while(count < num) {
+    FILE >> digraph;
+    count++;
+    sorted.insert(digraph);
+  }
   if(arg2 == "a") {
-    while(count < num) {
-      FILE >> digraph;
-      count++;
-      sorted.insert(digraph);
-    }
-    
     for(std::set<string>::iterator it = sorted.begin(); it != sorted.end(); it++) {
       FILE2.open(argv[1], std::ifstream::in);
       cout << *it << ": [";    
@@ -58,33 +57,21 @@ int main(int argc, char* argv[]) {
     }
     
   }
-  /*
+  
   else if (arg2 == "r"){
-    cout << "ry" << endl;
+    for(std::set<string>::reverse_iterator it = sorted.rbegin(); it != sorted.rend(); it++) {
+      FILE2.open(argv[1], std::ifstream::in);
+      cout << *it << ": [";
+      int ndioccur = dioccur(*it, FILE2);
+      cout << "]" << endl;
+    }
   }
+  /*
   else if (arg2 == "c"){
     cout << "cr" << endl;
   }
+  */
   
-  while(count < num) {
-    
-    FILE2.open(argv[1], std::ifstream::in);
-    /*
-    FILE >> digraph;
-    cout << digraph << ": [";
-    int ndioccur = dioccur(digraph, FILE2);
-    cout << "]" << endl; 
-    
-    //Map new;
-    //Mapmake(new, digraph, ndioccur);
-
-    
-    count++;
-        
-    //break;
-    
-  }
-*/
   cout << "q?>";
   string qquit = "quit";
   cin >> input;
