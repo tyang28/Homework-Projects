@@ -1,5 +1,5 @@
 /**
- *HW5 
+1;95;0c *HW5 
  *Teng-Ju Yang tyang28
  */
 
@@ -24,19 +24,23 @@ int main(int argc, char* argv[]) {
     return 1;
   }
   std::ifstream FILE;
-  
+  std::ifstream FILE2;
   FILE.open(argv[1], std::ifstream::in);
-  
   int num;
   int count = 0;
   string digraph;
   FILE >> num;
   
   while(count < num) {
+    
+    FILE2.open(argv[1], std::ifstream::in);
     FILE >> digraph;
-    dioccur(digraph, FILE);
+    cout << digraph << endl;
+    int a = dioccur(digraph, FILE2);
+    cout << a << endl;
     count++;
-    break;
+    
+    //break;
   }
   
   return 0;
