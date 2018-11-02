@@ -1,8 +1,8 @@
 CXX=g++
-CXXFLAGS = -Wall -Wextra -pedantic -std=c++11 -g
+CXXFLAGS =-std=c++11 -Wall -Wextra -pedantic -g
 
 digraphAnalyzer: digraphAnalyzer.o functions.o
-	$(CXX) -o digraphAnalyzer digraphAnalyzer.o functions.o
+	$(CXX) digraphAnalyzer.o functions.o -lm -o digraphAnalyzer
 
 digraphAnalyzer.o: digraphAnalyzer.cpp functions.h
 	$(CXX) $(CFLAGS) -c digraphAnalyzer.cpp
