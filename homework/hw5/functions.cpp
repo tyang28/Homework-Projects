@@ -20,7 +20,7 @@ using std::map;
 using std::vector;
 
 
-
+//Check number of occurences of a digraph in text
 int dioccur (string digraph, std::ifstream& FILE2) {
   string word;
   string input;
@@ -46,9 +46,12 @@ int dioccur (string digraph, std::ifstream& FILE2) {
   FILE2.close();  
   return count;
 }
+
+//prints out the words that contain that digraph
 void printString (string digraph, std::ifstream& FILE3) {
   string word;
   string input;
+  
   getline(FILE3, input);
 
   for(unsigned int a = 0; a < digraph.length(); a++) {
@@ -59,7 +62,6 @@ void printString (string digraph, std::ifstream& FILE3) {
     for(unsigned int i = 0; i < word.length(); i++) {
       word[i] = tolower(word[i]);
     }
-    
     if(word.find(digraph) != string::npos) {
       cout << word << ", "; 
     }
@@ -70,6 +72,7 @@ void printString (string digraph, std::ifstream& FILE3) {
 
 }
 
+//A printstring function that prints the word that contains a digraph but also returns if it matches the number entered
 int numprintString (string digraph, std::ifstream& FILE3) {
   string word;
   string input;
@@ -96,6 +99,7 @@ int numprintString (string digraph, std::ifstream& FILE3) {
   return check;
 }
 
+//Another printstring that prints word that has digraph in a different format
 void normalprintString (string digraph, std::ifstream& FILE2) {
   string word;
   string input;
