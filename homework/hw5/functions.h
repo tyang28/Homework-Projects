@@ -6,11 +6,15 @@
 #include <cctype>
 #include <iostream>
 #include <string>
-//typedef map<string, int> Map;
 
-int dioccur(std::string digraph, std::ifstream& FILE);
-//void Mapmake(Map mappedword, string digraph, char file[]); 
 
+int dioccur(std::string digraph, std::ifstream& FILE2);
+
+void printString(std::string digraph, std::ifstream& FILE3);
+
+int numprintString(std::string digraph, std::ifstream& FILE3);
+
+void normalprintString(std::string digraph, std::ifstream& FILE2);
 
 
 
