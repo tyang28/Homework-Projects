@@ -7,7 +7,7 @@
 #include <iostream>
 #include "CTree.h"
 #include <cstdlib>
-
+#include <sstream>
 
 using std::cin;
 using std::string;
@@ -21,29 +21,31 @@ CTree::CTree(char tch) : data(tch), kids(NULL), sibs(NULL), prev(NULL) {
 */
 
 CTree::CTree(char tch) {
-  this->data = tch;
-  this->kids = nullptr; 
-  this->sibs = nullptr;
-  this->prev = nullptr;
+  data = tch;
+  kids = nullptr; 
+  sibs = nullptr;
+  prev = nullptr;
 }
 
 
 bool CTree::findVal(char ch) {
+  
   bool check = false;
-  CTree *cur = this->kids;
-  if(this->data == ch) {
+  
+  CTree *cur = sibs;
+  if(data == ch) {
       check = true;
       return check;
   }
-  else if(cur != nullptr) {
-    if(cur->data == ch) {
+  else if(kids != nullptr) {
+    if(kids->data == ch) {
       check = true;
       return check;
     }
   }
   else {
-    while(cur->sibs != nullptr) {
-      if(cur->sibs->data == ch) {
+    while(cur != nullptr) {
+      if(cur->data == ch) {
 	check = true;
 	return check;
       }
@@ -51,46 +53,97 @@ bool CTree::findVal(char ch) {
     }
   }
 
-
+  
   return check;
 }
 
 
 bool CTree::addChild(CTree *root) {
   bool check = false;
-  if(root == nullptr) {
-    return check;
-  }
   
-  if((root->prev != nullptr) || (root->sibs != nullptr)) {
-    return check; 
+  if(checkRoot(root)) {  
+    CTree *nc = root;
+    CTree *cur = sibs;
+    if(kids == nullptr) {
+      kids = nc;
+      check = true;
+      printf("11\n");
+      return check;
+    }
+    else if(kids != nullptr) {  
+      if(nc->data < kids->data) {
+        nc->sibs = kids;
+        kids->prev = nc;
+        check = true;
+        return check;
+      }
+      else if(kids->data < nc->data) {
+	printf("3\n");
+        while(cur != nullptr) {
+          if(nc->data < cur->data) {
+            nc->sibs = cur;
+            nc->prev = cur->prev;
+	    cur->prev->sibs = nc;
+            cur->prev = nc;
+            check = true;
+            return check;
+          }
+          cur = cur->sibs;
+        }
+        if(cur == nullptr){
+	  printf("4\n");
+          nc->sibs = nullptr;
+          nc->prev = cur;
+          cur->sibs = nc;
+          check = true;
+          return check;
+        }
+      }
+    }
+    
   }
-  if(findVal(root->data)) {
-    return check;
-  }
-  if(addSibling(root)) {
-    check = true;
-    return check;
-  }
- 
+    
   return check;
 }
 
+bool CTree::checkRoot(CTree *root) {
+  bool check = true;
+  if(root == nullptr) {
+    cout << "1" << endl;
+    check = false;
+    return check;
+  }
+  else if((root->prev != nullptr) || (root->sibs != nullptr)) {
+    cout << "2" << endl;
+    check = false;
+    return check;
+  }
+  else if(findVal(root->data)) {
+    cout << "3" << endl;
+    check = false;
+    return check;
+  }
 
-
+  return check;
+}
 
 bool CTree::addSibling(CTree *root) {
+  
   bool check = false;
-  if(!findVal(root->data)) {
+  /*
+  if(findVal(root->data)) {
+    return check;
+  }
+  else {
     CTree *nc = root;
-    CTree *cur = this->kids;
+    CTree *cur = sibs;
     if(cur == nullptr) {
       cur = nc;
     }
     else if(cur != nullptr) {
       if(nc->data < cur->data) {
         nc->sibs = cur;
-        nc->prev = nullptr;
+        nc->prev = kids;
         cur->prev = nc;
         check = true;
         return check;
@@ -117,24 +170,43 @@ bool CTree::addSibling(CTree *root) {
       }
     }
   }
+  */
   return check;
+  
 }
 
 string CTree::toString() {
-  string s;
-  s += this->data;
-  s += "\n";
-  CTree *cur = this->kids;
-  toString();
-  cur = cur->sibs;
-  toString();
-  return s;
+  std::stringstream ss;
+  ss << data << endl;
+  if(kids != nullptr) {
+    ss << kids->toString();
+  }
+  if(sibs != nullptr) {
+    ss << sibs->toString();
+  }
+  return ss.str();
 }
 
 bool CTree::addChild(char ch) {
   bool check = false;
-  if(!findVal(ch)) {
+  
+  if(findVal(ch)) {
+    return check;
+  }
+  else if(!findVal(ch)) {
     CTree nc(ch);
+    addChild(&nc);
+    check = true;
+
+
+    /*
+    if(addChild(&nc)) {
+      check = true;
+      return check;
+    }
+    */
+    
+    /*
     CTree *cur = this->kids;
     if(cur == nullptr) {
       cur = &nc;
@@ -169,6 +241,7 @@ bool CTree::addChild(char ch) {
       }
       
     }
+    */
   }
 
   return check;
