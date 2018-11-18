@@ -36,8 +36,6 @@ class CTree {
   // returns false on any type of failure, including invalid root
   bool addChild(CTree *root);
 
-  bool findVal(char ch);
-  
   std::string toString(); // all characters, separated by newlines, including at the end
 
   private:
